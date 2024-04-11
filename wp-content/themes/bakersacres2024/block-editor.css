@@ -1,0 +1,12 @@
+@import url('fonts/CustomFonts.css');
+.edit-post-visual-editor .is-root-container {
+  background-color: #464646;
+  background-image: url("/wp-content/themes/bakersacres2024/images/site-bg.jpg");
+  background-size: 100% auto;
+  font-family: 'Jost';
+}
+.edit-post-visual-editor .is-root-container h1,
+.edit-post-visual-editor .is-root-container h2,
+.edit-post-visual-editor .is-root-container h3 {
+  font-family: 'Marcellus';
+}
