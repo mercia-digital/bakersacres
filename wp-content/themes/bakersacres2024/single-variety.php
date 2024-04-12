@@ -35,13 +35,6 @@
             <div class="sizes">
                 <h4>Sizes</h4>
                 <div class="table"> <?php
-                    $stock_flags = [
-                        -1 => 'Out of Stock',
-                        0 => 'Planned',
-                        1 => 'In Production',
-                        2 => 'In Store'
-                    ];
-
                     foreach(get_field('sizes') as $size) {
                         if (!$size['SizeName']) {
                             continue;
@@ -49,7 +42,7 @@
                         <div class="size">
                             <div><?=$size['SizeName']?></div>
                             <div><?php if ($size['Price'] > 0 && $size['Avail']) : echo "$".number_format($size['Price'], 2, '.', ','); endif;?></div>
-                            <div><?=$stock_flags[$size['stock_flag']]?></div>
+                            <div><?=get_status_name($size['stock_flag'])?></div>
                         </div> <?php
                     } ?>
                 </div>

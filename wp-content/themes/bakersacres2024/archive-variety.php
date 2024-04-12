@@ -63,18 +63,15 @@ $full_query = new WP_Query($args); ?>
         <!-- <h4><?=get_field('catalog_header', 'option')?></h4> -->
     </div>
 </div>
-<div id="controls" class="<?=$has_filters ? 'active' : ''?>">
-    <button class="clear-filters <?=$has_filters ? 'active' : ''?>" name="clear-filters">Clear Filters</button>
-</div>
-<div id="title-groups">
-    <label>View Titles</label>
-    <button class="title-group" data-letters="a,b,c,d,e,f">A-F</button>
-    <button class="title-group" data-letters="g,h,i,j,k,l">G-L</button>
-    <button class="title-group" data-letters="m,n,o,p,q,r">M-R</button>
-    <button class="title-group" data-letters="s,t,u,v,w,x,y,z">S-Z</button>
-</div>
 <div id="variety-list-wrapper">
+    <div id="title-groups">
+        <button class="title-group" data-letters="a,b,c,d,e,f">A-F</button>
+        <button class="title-group" data-letters="g,h,i,j,k,l">G-L</button>
+        <button class="title-group" data-letters="m,n,o,p,q,r">M-R</button>
+        <button class="title-group" data-letters="s,t,u,v,w,x,y,z">S-Z</button>
+    </div>
     <div id="variety-list-sidebar">
+        <button class="clear-filters <?=$has_filters ? 'active' : ''?>" name="clear-filters">Clear Filters</button>
         <div class="category-list">
             <div class="mobile-filters">
             <div class="heading rough-line rough-underline-lime">
@@ -129,6 +126,11 @@ $full_query = new WP_Query($args); ?>
                 </div>
             </div>
         </div>
+        <div class="legend">
+            <div class="content">
+                <?=apply_filters('the_content', get_field('status_names_legend', 'option'))?>
+            </div>
+        </div>
     </div>
     <div id="variety-list"> <?php
         while (have_posts()) { the_post(); ?>
@@ -151,12 +153,6 @@ $full_query = new WP_Query($args); ?>
                     $stock_flag = "";
                     $sizes = get_field('sizes');
                     $prices = [];
-                    $stock_flags = array(
-                        -1 => 'Out of Stock',
-                        0 => 'Planned',
-                        1 => 'In Production',
-                        2 => 'In Store'
-                    );
 
                     usort($sizes, function($a, $b) {
                         return $a['Price'] <=> $b['Price'];
@@ -175,7 +171,7 @@ $full_query = new WP_Query($args); ?>
                             $price_string .= " - $" . number_format($prices[count($prices) - 1], 2, '.', ',');
                         }
                     } ?>
-                    <div class="stock-price"><?=$stock_flags[$flag]?><?=$price_string?></div>
+                    <div class="stock-price"><?=get_status_name($flag)?><?=$price_string?></div>
                 </div>
                 
             </div> <?php

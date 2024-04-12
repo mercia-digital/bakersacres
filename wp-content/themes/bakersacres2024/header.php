@@ -47,9 +47,9 @@
 					</div>
 				</div>
 			</div>
-			<div class="search-form-wrapper">
-				<?=get_search_form()?>
-			</div>
+		</div>
+		<div class="search-form-wrapper">
+			<?=get_search_form()?>
 		</div>
 	</div>
 

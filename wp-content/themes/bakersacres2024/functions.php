@@ -24,8 +24,7 @@ if ( ! function_exists( 'bka_styles' ) ) {
 }
 add_action( 'wp_enqueue_scripts', 'bka_styles' );
 
-function bka_register_widgets() {
- 
+function bka_register_widgets() { 
 	register_sidebar( array(
 	 'name' => __( 'Footer', 'bka' ),
 	 'id' => 'footer-widget-area',
@@ -35,8 +34,7 @@ function bka_register_widgets() {
 	 'before_title' => '<h3 class="widget-title">',
 	 'after_title' => '</h3>',
    
-	) );
-   
+	) );   
 }
    
 add_action( 'widgets_init', 'bka_register_widgets' );
@@ -95,6 +93,19 @@ function shortcode_bka_hours($atts) {
     return "<div class='bka-hours ".$a['class']."'>".format_business_hours($business_hours)."</div>";
 }
 add_shortcode('bka-hours', 'shortcode_bka_hours');
+
+//Get Status flag name
+function get_status_name($val) {
+    $options = get_field('status_names', 'option');
+
+    foreach ($options as $op) {
+        if ($op['value'] == $val) {
+            return $op['name'];
+        }
+    }
+
+    return '';
+}
 
 // function md_site_favicon() {
 // 	if (function_exists('acf')) {

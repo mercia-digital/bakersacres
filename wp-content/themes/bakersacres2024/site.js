@@ -9,7 +9,13 @@ jQuery(document).ready(function ($) {
     $('.search-toggle').click(function () {
         $(this).toggleClass('is-active');
         $('#masthead .search-form-wrapper').toggleClass('open');
+        var top = $('#masthead .wrapper .main-nav').outerHeight();
+
+        $('#masthead .search-form-wrapper.open').css('top', top+"px");
+        $('#masthead .search-form-wrapper:not(.open)').css('top', 0);
+        
         $('#masthead').toggleClass('search-open');
+        $('body').toggleClass('search-open');
     });
 });
 
@@ -28,7 +34,14 @@ jQuery(document).ready(function ($) {
 });
 
 jQuery(document).ready(function ($) {
-    $('#controls .clear-filters').click(function () {
+    $('#variety-list .variety-card').click(function () {
+        var url = $(this).find('.title a')[0].href;
+        window.location.href = url;
+    });
+});
+
+jQuery(document).ready(function ($) {
+    $('.clear-filters').click(function () {
         window.location.href = window.location.href.replace(window.location.search,'');
     });
 });
